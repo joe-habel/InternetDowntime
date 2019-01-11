@@ -1,0 +1,61 @@
+<!doctype html>
+<head>
+<meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
+</head>
+<html>
+<body>
+<div>
+<img src="/static/{{filename}}.png" alt="Uptime Graph"/>
+</div>
+<div>
+{% if downtime %}
+<h3> The internet has been down for {{((downtime/total_time)*100)|round(2)}} percent of this month. </h3>
+<h3> This program has monitored your activity for {{((runtime/total_time)*100)|round(2)}} percent of this month.</h3>
+<h3> The internet has been down for {{((downtime/runtime)*100)|round(2)}} percent of the time this program has been running this month.</h3>
+{% else %}
+<h2> The internet hasn't gone down at all this month so far!</h2>
+<h3> This program has monitored your activity for {{((runtime/total_time)*100)|round(2)}} percent of this month.</h3> 
+{% endif %}
+</div>
+<div>
+<form method="post" action="/">
+<div>
+<input type="submit" value="Last Month" name="Last"/>
+<input type="submit" value="This Month" name="This"/>
+<br>
+<br>
+</div>
+</form>
+</div>
+</div>
+<div>
+<table border=1>
+<thead>
+<tr>
+<th>Time</th>
+<th>Download Speed (Mbps)</th>
+<th>Upload Speed (Mbps)</th>
+<th>Ping (ms)</th>
+</tr>
+</thead>
+<tbody>
+{% for row in current_uptime %}
+{% if row %}
+<tr>
+<th>{{row[0]}}</th>
+<td align="center">{{(row[1])|float|round(2)}}</td>
+<td align="center">{{(row[2])|float|round(2)}}</td>
+<td align="center">{{(row[3])|float|round(2)}}</td>
+</tr>
+{% endif %}
+{% endfor %}
+</tbody>
+</table>
+</div>
+</body>
+</html>
