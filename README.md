@@ -10,4 +10,4 @@ To launch, if on a Windows machine simple run the launch.vbs script.
 If not, simply run:
 > python app.py
 
-Running through the vbs script allows that vbs script to be bound to startup on windows.
+If on Windows, to run this automatically on startup, simply drag the launch.vbs script into the startup folder.
